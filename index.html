@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Your demo site is ready | Demoable.IO</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" href="./css/bootstrap.min.css" type="text/css"> -->
+    <link rel="stylesheet" href="./css/styles.css">
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="icon" href="./img/favicon.ico" type="image/x-icon">
+</head>
+
+<body>
+
+<div class="container py-5 my-5">
+    <h1 class="text-primary text-center pb-5">ROI Calculator</h1>
+    <h5 class="Lead">Instructions</h5>
+    <p class="small">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum commodi quam, soluta necessitatibus iste beatae a minus quas quasi quisquam, ut blanditiis incidunt sit explicabo dolores facilis earum nam sed deleniti fugiat.
+        Consequuntur corporis soluta at necessitatibus rerum perferendis inventore eveniet omnis alias similique, tempora sapiente sit. Neque, consectetur, quam.</p>
+    <div class="row">
+        <div class="col w-md-50 mx-auto mt-5">
+            <form id="deploymentProcess">
+                <h5 class="Lead">Your Deployment Process</h5>
+                <small>Enter the average number of updates per sprint made on each environment.</small>
+                <div class="row flex-column flex-sm-row align-items-center justify-content-center">
+
+                    <div class="col mt-3">
+                        <div class="form-group">
+                            <label for="devEnv">Dev Sandboxes</label>
+                            <input type="number" class="form-control form-control-lg environments narrowBox" id="devEnv" aria-describedby="devEnv" value="4">
+                            <small id="devEnvHelp" class="form-text text-muted">Updates per sprint</small>
+                        </div>
+                    </div>
+                    <div class="col-1 d-none d-md-inline">
+                        <i class=" fas fa-chevron-right"></i>
+                    </div>
+                    <div class="col mt-3">
+                        <div class="form-group">
+                            <label for="qaEnv">QA Sandbox</label>
+                            <input type="number" class="form-control form-control-lg environments narrowBox" id="qaEnv" aria-describedby="qaEnv" value="3">
+                            <small id="qaEnvHelp" class="form-text text-muted">Updates per sprint</small>
+                        </div>
+                    </div>
+                    <div class="col-1 d-none d-md-inline">
+                        <i class=" fas fa-chevron-right"></i>
+                    </div>
+                    <div class="col mt-3">
+                        <div class="form-group">
+                            <label for="uatEnv">UAT Sandbox</label>
+                            <input type="number" class="form-control form-control-lg environments narrowBox" id="uatEnv" aria-describedby="uatEnv" value="2">
+                            <small id="uatEnvHelp" class="form-text text-muted">Updates per sprint</small>
+                        </div>
+                    </div>
+                    <div class="col-1 d-none d-md-inline">
+                        <i class=" fas fa-chevron-right"></i>
+                    </div>
+                    <div class="col mt-3">
+                        <div class="form-group">
+                            <label for="prodEnv">Production</label>
+                            <input type="number" class="form-control form-control-lg environments narrowBox" id="prodEnv" aria-describedby="prodEnv" value="1">
+                            <small id="prodEnvHelp" class="form-text text-muted">Updates per sprint</small>
+                        </div>
+                    </div>
+
+                </div>
+            </form>
+
+            <hr class="my-5">
+
+            <form action="">
+                <div class="form-group row">
+                    <div class="col-12 col-md-3">
+                        <label class="col-form-label" for="totalEnvs">Total updates per sprint</label>
+                    </div>
+                    <div class="col-12 col-md-9">
+                        <input tabindex="-1" id="totalEnvs" class="form-control form-control-lg midBox" type="number" value="0" readonly>
+                    </div>
+                </div>
+
+
+                <div class="form-group row align-items-center">
+                    <div class="col-12 col-md-3">
+                        <label class="col-form-label" for="annualSprints">Total sprints per year</label>
+                    </div>
+                    <div class="col-12 col-md-9">
+                        <div id="annualSprints">
+                            <div id="annualSprintsHandle" class="ui-slider-handle"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-12 col-md-3">
+                        <label class="col-form-label" for="annualUpdates">Annual updates</label>
+                    </div>
+                    <div class="col-12 col-md-9">
+                        <input tabindex="-1" id="annualUpdates" class="form-control form-control-lg midBox" type="number" value="0" readonly>
+                    </div>
+                </div>
+
+                <hr class="my-5">
+
+                <div class="form-group row align-items-center">
+                    <div class="col-12 col-md-3">
+                        <label class="col-form-label" for="updateHoursWith">Hours per update</label>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <div id="updateHoursWithout">
+                            <div id="updateHoursWithoutHandle" class="ui-slider-handle"></div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <input tabindex="-1" id="updateHoursWith" class="form-control form-control-lg narrowBox" type="number" value="0" readonly>
+                    </div>
+                </div>
+                <div class="form-group row align-items-center">
+                    <div class="col-12 col-md-3">
+                        <label class="col-form-label" for="hourlyCost">Hourly labor cost ($)</label>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <div id="hourlyCostWithout">
+                            <div id="hourlyCostWithoutHandle" class="ui-slider-handle"></div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <div id="hourlyCostWith">
+                            <div id="hourlyCostWithHandle" class="ui-slider-handle"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-12 col-md-3">
+                        <label class="col-form-label" for="annualCost">Total labor cost</label>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">$</div>
+                            </div>
+                            <input tabindex="-1" id="annualCostWithout" class="form-control form-control-lg wideBox" type="number" value="0" readonly>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">$</div>
+                            </div>
+                            <input tabindex="-1" id="annualCostWith" class="form-control form-control-lg wideBox" type="number" value="0" readonly>
+                        </div>
+                    </div>
+                </div>
+
+                <hr class="my-5">
+
+                <div class="form-group row">
+                    <div class="col-12 col-md-3">
+                        <label class="col-form-label" for="isvInvestment">ISV investment</label>
+                    </div>
+                    <div class="col-12 col-md-9">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">$</div>
+                            </div>
+                            <input id="isvInvestment" class="form-control form-control-lg wideBox" type="number" value="10000">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-12 col-md-3">
+                        <label class="col-form-label" for="annualCost">ROI</label>
+                    </div>
+                    <div class="col-12 col-md-9">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">%</div>
+                            </div>
+                            <input tabindex="-1" id="roi" class="form-control form-control-lg wideBox" type="number" value="0" readonly>
+                        </div>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+<script src="./js/jquery.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="./js/bootstrap.min.js"></script>
+<script src="./js/popper.min.js"></script>
+<script src="./js/main.js"></script>
+</body>
+
+</html>

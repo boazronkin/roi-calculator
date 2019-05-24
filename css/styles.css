@@ -1,0 +1,1 @@
+input{max-width:300px}#annualSprintsHandle,#hourlyCostWithHandle,#hourlyCostWithoutHandle,#updateHoursHandle,#updateHoursWithoutHandle{width:3em;height:2em;top:20%;margin-top:-.7em;text-align:center;line-height:1.9em;font-size:20px}@media (min-width:768px){.narrowBox{max-width:100px}.midBox{max-width:100px}.wideBox{max-width:150px}}
