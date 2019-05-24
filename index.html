@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Your demo site is ready | Demoable.IO</title>
+    <title>ROI Calculator</title>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
     <!-- <link rel="stylesheet" href="./css/bootstrap.min.css" type="text/css"> -->
     <link rel="stylesheet" href="./css/styles.css">
@@ -78,6 +78,7 @@
                     </div>
                     <div class="col-12 col-md-9">
                         <input tabindex="-1" id="totalEnvs" class="form-control form-control-lg midBox" type="number" value="0" readonly>
+                        <small id="" class="form-text text-muted">Updates across all environments</small>
                     </div>
                 </div>
 
@@ -86,10 +87,11 @@
                     <div class="col-12 col-md-3">
                         <label class="col-form-label" for="annualSprints">Total sprints per year</label>
                     </div>
-                    <div class="col-12 col-md-9">
+                    <div class="col-12 col-md-9 my-3">
                         <div id="annualSprints">
                             <div id="annualSprintsHandle" class="ui-slider-handle"></div>
                         </div>
+                        <small id="annualSprintsHelp" class="form-text text-muted mt-3">Annual sprints</small>
                     </div>
                 </div>
                 <div class="form-group row">
@@ -98,6 +100,7 @@
                     </div>
                     <div class="col-12 col-md-9">
                         <input tabindex="-1" id="annualUpdates" class="form-control form-control-lg midBox" type="number" value="0" readonly>
+                        <small id="" class="form-text text-muted mt-3">Total sprint updates X sprints</small>
                     </div>
                 </div>
 
@@ -107,49 +110,55 @@
                     <div class="col-12 col-md-3">
                         <label class="col-form-label" for="updateHoursWith">Hours per update</label>
                     </div>
-                    <div class="col-12 col-md-4">
+                    <div class="col-12 col-md-4 my-3 mr-md-5 d-md-flex flex-column justify-content-center">
                         <div id="updateHoursWithout">
                             <div id="updateHoursWithoutHandle" class="ui-slider-handle"></div>
                         </div>
+                        <small id="" class="form-text text-muted mt-4">Manual update without ISV solution</small>
                     </div>
                     <div class="col-12 col-md-4">
                         <input tabindex="-1" id="updateHoursWith" class="form-control form-control-lg narrowBox" type="number" value="0" readonly>
+                        <small id="" class="form-text text-muted mb-3">Automated update with ISV solution</small>
                     </div>
                 </div>
                 <div class="form-group row align-items-center">
                     <div class="col-12 col-md-3">
                         <label class="col-form-label" for="hourlyCost">Hourly labor cost ($)</label>
                     </div>
-                    <div class="col-12 col-md-4">
+                    <div class="col-12 col-md-4 my-3  mr-md-5 d-md-flex flex-column justify-content-center">
                         <div id="hourlyCostWithout">
                             <div id="hourlyCostWithoutHandle" class="ui-slider-handle"></div>
                         </div>
+                        <small id="" class="form-text text-muted mt-4">Hourly rate of developers/architects</small>
                     </div>
-                    <div class="col-12 col-md-4">
+                    <div class="col-12 col-md-4 my-3">
                         <div id="hourlyCostWith">
                             <div id="hourlyCostWithHandle" class="ui-slider-handle"></div>
                         </div>
+                        <small id="" class="form-text text-muted mt-4">Hourly rate of architects</small>
                     </div>
                 </div>
                 <div class="form-group row">
                     <div class="col-12 col-md-3">
                         <label class="col-form-label" for="annualCost">Total labor cost</label>
                     </div>
-                    <div class="col-12 col-md-4">
+                    <div class="col-12 col-md-4 my-3  mr-md-5">
                         <div class="input-group">
                             <div class="input-group-prepend">
                                 <div class="input-group-text">$</div>
                             </div>
                             <input tabindex="-1" id="annualCostWithout" class="form-control form-control-lg wideBox" type="number" value="0" readonly>
                         </div>
+                        <small id="" class="form-text text-muted mb-3">Total update cost without ISV solution</small>
                     </div>
-                    <div class="col-12 col-md-4">
+                    <div class="col-12 col-md-4 my-3">
                         <div class="input-group">
                             <div class="input-group-prepend">
                                 <div class="input-group-text">$</div>
                             </div>
                             <input tabindex="-1" id="annualCostWith" class="form-control form-control-lg wideBox" type="number" value="0" readonly>
                         </div>
+                        <small id="" class="form-text text-muted mb-3">Total update cost with ISV solution</small>
                     </div>
                 </div>
 
@@ -166,6 +175,7 @@
                             </div>
                             <input id="isvInvestment" class="form-control form-control-lg wideBox" type="number" value="10000">
                         </div>
+                        <small id="" class="form-text text-muted mb-3">Cost of ISV solution</small>
                     </div>
                 </div>
 
@@ -175,11 +185,12 @@
                     </div>
                     <div class="col-12 col-md-9">
                         <div class="input-group">
-                            <div class="input-group-prepend">
+                            <input tabindex="-1" id="roi" class="form-control form-control-lg wideBox" type="number" value="0" readonly>
+                            <div class="input-group-append">
                                 <div class="input-group-text">%</div>
                             </div>
-                            <input tabindex="-1" id="roi" class="form-control form-control-lg wideBox" type="number" value="0" readonly>
                         </div>
+                        <small id="" class="form-text text-muted mb-3">Cost savings / ISV cost</small>
                     </div>
                 </div>
 
