@@ -1,1 +1,156 @@
-"use strict";$(document).ready(function(){function t(){var n=0;$("#deploymentProcess").find(".environments").each(function(){var t=function(t){return v(t<0?-t:t)}($(this)[0].value);$(this).val(t),n+=t}),$("#totalEnvs").val(n)}function l(){var t=v($("#totalEnvs").val()),n=$("#annualSprints").slider("value"),e=$("#hourlyCostWithout").slider("value"),a=$("#hourlyCostWith").slider("value"),i=$("#updateHoursWithout").slider("value"),u=v($("#isvInvestment").val()),l=t*n;$("#annualUpdates").val(c(l));var o=i/10;$("#updateHoursWith").val(c(o));var s=e*i*l;$("#annualCostWithout").val(c(s));var r=a*o*l;$("#annualCostWith").val(c(r)),$("#roi").val(c(100*(s-r-u)/u))}function v(t){return parseInt(t.replace(/,/g,""),10)}function c(t){return parseInt(t).toLocaleString()}$("#deploymentProcess .environments").change(function(){t(),l()}),$("#isvInvestment").change(function(){$(this).val(c($(this).val())),l()}),function(){var e=$("#annualSprintsHandle");$("#annualSprints").slider({min:1,max:55,value:10,create:function(){e.text($(this).slider("value"))},slide:function(t,n){e.text(n.value)},change:function(t,n){l()}});var a=$("#updateHoursWithoutHandle");$("#updateHoursWithout").slider({min:1,max:100,value:20,create:function(){a.text($(this).slider("value"))},slide:function(t,n){a.text(n.value)},change:function(t,n){l()}});var i=$("#hourlyCostWithoutHandle");$("#hourlyCostWithout").slider({min:0,max:500,step:25,value:100,create:function(){i.text($(this).slider("value"))},slide:function(t,n){i.text(n.value)},change:function(t,n){l()}});var u=$("#hourlyCostWithHandle");$("#hourlyCostWith").slider({min:0,max:500,step:25,value:70,create:function(){u.text($(this).slider("value"))},slide:function(t,n){u.text(n.value)},change:function(t,n){l()}})}(),t(),l()});
+(function () {
+  'use strict';
+
+$(function()  {
+
+    $('#deploymentProcess .environments').change(function() {
+        updateTotalEnvs();
+        updateFields();
+    });
+
+    $('#isvInvestment').change(function() {
+        $(this).val( getStr( $(this).val() ) );
+        updateFields();
+    });
+
+     function updateTotalEnvs() {
+         var envs = 0;
+         $('#deploymentProcess').find(".environments").each(function() {
+             var envUpdates = checkEnvUpdates($(this)[0].value);
+             $(this).val(envUpdates);
+             envs += envUpdates;
+         });
+
+         $('#totalEnvs').val(envs);
+
+         function checkEnvUpdates(updates) {
+             if (updates < 0) {
+                     return getNum(-updates);
+             }
+             else {
+                 return getNum(updates);
+             }
+         }
+     }
+
+     // $( function() {
+     function initSliders() {
+        var annualSprintsHandle = $( "#annualSprintsHandle" );
+        $( "#annualSprints" ).slider({
+            min: 1,
+            max: 55,
+            value: 10,
+          create: function() {
+            annualSprintsHandle.text( $( this ).slider( "value" ) );
+          },
+          slide: function( event, ui ) {
+            annualSprintsHandle.text( ui.value );
+        },
+        change: function(event, ui) {
+            updateFields();
+        }
+        });
+
+        var updateHoursWithoutHandle = $( "#updateHoursWithoutHandle" );
+        $( "#updateHoursWithout" ).slider({
+            min: 1,
+            max: 100,
+            value: 20,
+          create: function() {
+            updateHoursWithoutHandle.text( $( this ).slider( "value" ) );
+          },
+          slide: function( event, ui ) {
+            updateHoursWithoutHandle.text( ui.value );
+        },
+        change: function(event, ui) {
+            updateFields();
+        }
+        });
+
+        var hourlyCostWithoutHandle = $( "#hourlyCostWithoutHandle" );
+        $( "#hourlyCostWithout" ).slider({
+            min: 0,
+            max: 500,
+            step: 25,
+            value: 100,
+          create: function() {
+            hourlyCostWithoutHandle.text( $( this ).slider( "value" ) );
+          },
+          slide: function( event, ui ) {
+            hourlyCostWithoutHandle.text( ui.value );
+        },
+        change: function(event, ui) {
+            updateFields();
+        }
+        });
+
+        var hourlyCostWithHandle = $( "#hourlyCostWithHandle" );
+        $( "#hourlyCostWith" ).slider({
+            min: 0,
+            max: 500,
+            step: 25,
+            value: 70,
+          create: function() {
+            hourlyCostWithHandle.text( $( this ).slider( "value" ) );
+          },
+          slide: function( event, ui ) {
+            hourlyCostWithHandle.text( ui.value );
+        },
+        change: function(event, ui) {
+            updateFields();
+        }
+        });
+    }
+
+    function updateFields() {
+        // Grab updated info from readonly inputs and sliders
+        var totalEnvs = getNum( $('#totalEnvs').val() );
+        var annualSprints = $('#annualSprints').slider("value");
+        var hourlyCostWithout = $('#hourlyCostWithout').slider('value');
+        var hourlyCostWith = $('#hourlyCostWith').slider('value');
+        var updateHoursWithout = $('#updateHoursWithout').slider('value');
+        var isvInvestment = getNum( $('#isvInvestment').val() );
+
+        // Update bottom line fields
+        var annualUpdates = totalEnvs * annualSprints;
+        $('#annualUpdates').val( getStr(annualUpdates ) );
+
+        var updateHoursWith = updateHoursWithout / 10;
+        $('#updateHoursWith').val( getStr(updateHoursWith) );
+
+        var annualCostWithout = hourlyCostWithout *
+                                                  updateHoursWithout *
+                                                  annualUpdates;
+        $('#annualCostWithout').val( getStr(annualCostWithout) );
+
+
+        var annualCostWith = hourlyCostWith *
+                                                    updateHoursWith *
+                                                    annualUpdates;
+        $('#annualCostWith').val( getStr(annualCostWith) );
+
+
+        $('#roi').val( getStr( ( annualCostWithout -
+                                                annualCostWith -
+                                                isvInvestment) *
+                                                100 / isvInvestment ) );
+    }
+
+    function getNum(data) {
+        return parseInt( data.replace( /,/g, '' ), 10 );
+    }
+
+    function getStr(number) {
+        return parseInt(number).toLocaleString();
+    }
+
+    (function main() {
+            initSliders();
+            updateTotalEnvs();
+            updateFields();
+
+    })();
+});
+
+
+})();
